@@ -46,11 +46,12 @@ export class HeroService {
   }
 
 
-  // TODO: Get data with HttpClient!
-  getHero(id: number) {
-    const hero = HEROES.find(hero => hero.id === id);
-    if (hero) this.log(`fetched Hero id: ${hero.id}`);
-    return of(hero);
+  getHero(id: number): Observable<Hero> {
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get<Hero>(url).pipe(
+      tap(_=> this.log(`Fetched hero id:${id}`)),
+      catchError(this.handleError<Hero>('getHero'))
+    );
   }
 
   private log(message: string){
