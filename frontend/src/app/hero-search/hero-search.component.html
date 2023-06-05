@@ -1,6 +1,6 @@
 <div id="search-component">
   <label for="search-box">Hero Search</label>
-  <input #searchBox type="text" id="search-box" (click)="search(searchBox.value)">
+  <input #searchBox type="text" id="search-box" (change)="search(searchBox.value)">
 
   <ul class="search-result">
     <li *ngFor="let hero of heroes$ | async">
